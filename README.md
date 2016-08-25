@@ -10,11 +10,11 @@ A quick overview of Classification and Regression Tree (CART) and the extention 
   + Titanic Passenger Survival Data (small dataset)
   + Banking Default Data (large dataset)
 + R Code
-  + Titanic_Explore.R
+  + Titanic_Explore.R (_optional_)
   + Titanic_CART.R
   + Titanic_RandomForest.R
-  + Banking_Default_Explore.R
-  + Banking_Default_CART.R
-  + Banking_Default_RandomForest.R
+  + Banking_Default_Explore.R (_tutorial_)
+  + Banking_Default_CART.R (_tutorial_)
+  + Banking_Default_RandomForest.R (_tutorial_)
 
 NOTE: Please Fork and Modifiy where appropriate, then issue a 'Pull' request and I'll merge in your changes.
