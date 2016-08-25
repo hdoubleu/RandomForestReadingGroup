@@ -2,7 +2,7 @@
 # https://www.kaggle.com/benhamner/titanic/random-forest-benchmark-r/code
 
 #Install Packages (IF NEEDED)
-install.packages("ggplot2","randomForest")
+install.packages("ggplot2","randomForest","randomForest","caret","e1071")
 
 #Load Libraries
 library(ggplot2)
@@ -19,7 +19,7 @@ indx <- sample(1:nrow(titanic3),size=nrow(titanic3)*0.7,replace=F)
 train <- titanic3[indx,]
 test  <- titanic3[-indx,]
 
-#Kick the data into shape
+#Kick the data into shape (wrapped in a function)
 extractFeatures <- function(data) {
   
   #extract features
@@ -47,9 +47,11 @@ extractFeatures <- function(data) {
 View(extractFeatures(train))
 
 #Grow the Random Forest
-rf <- randomForest(extractFeatures(train), as.factor(train$survived), ntree=100, importance=TRUE)
+rf <- randomForest(extractFeatures(train), 
+                   as.factor(train$survived), 
+                   ntree=100, importance=TRUE)
 
-#Prediction on Training
+#Prediction on Training & Test
 train$psurv <- predict(rf)
 test$psurv <- predict(rf, extractFeatures(test))
 
@@ -65,6 +67,7 @@ imp <- importance(rf, type=1)
 featureImportance <- data.frame(Feature=row.names(imp), Importance=imp[,1])
 
 quartz(height=7,width=7)
+#windows(height=7,width=7)
 ggplot(featureImportance, aes(x=reorder(Feature, Importance), y=Importance)) +
         geom_bar(stat="identity", fill="#53cfff") +
         coord_flip() + 
